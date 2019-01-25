@@ -14,7 +14,7 @@ class SmurfForm extends Component {
   addSmurf = e => {
     e.preventDefault();
     axios
-    .post('http://localhost:3000/smurfs', this.state)
+    .post('http://localhost:3333/smurfs', this.state)
     .then(res => {
       this.setState({ state: res.data});
       this.props.history.push('/smurfs');

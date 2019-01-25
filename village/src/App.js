@@ -3,7 +3,7 @@ import axios from 'axios';
 import './App.css';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
-import {Route, Link} from 'react-router-dom';
+import {Route, NavLink} from 'react-router-dom';
 
 // const clearedSmurf ={
 //   id:'',
@@ -23,7 +23,7 @@ class App extends Component {
 
   componentDidMount() {
     axios
-    .get('https://localhost:3333/smurfs')
+    .get('http://localhost:3333/smurfs')
     .then(res => {
       this.setState({
         smurfs: res.data
@@ -43,9 +43,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Link to={`/smurfs`}>Smurfs</Link>
-        <Route exact path="/smurf-form" render={props => <SmurfForm {...props} addSmurf={this.addSmurf}/> }></Route>
-        <Route exact path="/" render={props => <Smurfs {...props} smurfs={this.state.smurfs} />}></Route>
+        <div className="nav-bar">
+          <NavLink to={`/smurfs`}>Smurfs</NavLink>
+          <NavLink to={ `/smurf-form`}>Smurf Form</NavLink>
+        </div>
+        
+        <Route exact path="/smurf-form" render={props => <SmurfForm {...props} /> }></Route>
+        <Route exact path="/smurfs" render={props => <Smurfs {...props} smurfs={this.state.smurfs} />}></Route>
       </div>
     );
   }
